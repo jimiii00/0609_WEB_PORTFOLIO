@@ -1,0 +1,1310 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>JIMI — Portfolio</title>
+
+  <!-- OS CSS Libraries -->
+  <link rel="stylesheet" href="https://unpkg.com/98.css"/>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=VT323&family=Share+Tech+Mono&family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet"/>
+
+<style>
+/* ── Reset ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { padding-bottom: 44px; background: #000; overflow-x: hidden; }
+a { text-decoration: none; color: inherit; }
+
+.f-vt   { font-family: 'VT323', monospace !important; }
+.f-mono { font-family: 'Share Tech Mono', monospace !important; }
+.f-kr   { font-family: 'Noto Sans KR', sans-serif !important; }
+
+/* ── TASKBAR ── */
+.taskbar {
+  position: fixed; bottom: 0; left: 0; right: 0; height: 40px;
+  display: flex; align-items: center; gap: 4px; padding: 0 6px;
+  z-index: 9999;
+  transition: background 0.5s, border-color 0.5s;
+  background: #c0c0c0;
+  border-top: 2px solid #fff;
+  box-shadow: inset 0 1px 0 #dfdfdf;
+}
+.taskbar.xp   { background: linear-gradient(to bottom, #2a6dd9, #1a55b0); border-top-color: #3a80e8; }
+.taskbar.win7 { background: rgba(10,20,40,0.92); border-top-color: #3a6090; }
+.taskbar.win10{ background: #1c1c1c; border-top-color: #333; }
+.taskbar.macos{ background: rgba(255,255,255,0.15); backdrop-filter: blur(20px); border-top-color: rgba(255,255,255,0.2); }
+
+.start-btn {
+  height: 28px; padding: 0 10px;
+  font-family: 'Noto Sans KR', sans-serif; font-size: 12px; font-weight: bold;
+  cursor: pointer; white-space: nowrap;
+  background: #c0c0c0;
+  border-top: 2px solid #fff; border-left: 2px solid #fff;
+  border-right: 2px solid #404040; border-bottom: 2px solid #404040;
+  transition: all 0.3s;
+}
+.taskbar.xp .start-btn {
+  background: linear-gradient(to bottom, #5db85d, #3c8c3c);
+  border-radius: 0 10px 10px 0; border-color: transparent; color: #fff; font-weight: bold;
+}
+.taskbar.win7 .start-btn {
+  background: radial-gradient(circle at 50% 40%, #3a80d0, #1a50a0);
+  border-radius: 50%; width: 34px; height: 34px; padding: 0;
+  border-color: transparent; color: #fff; font-size: 16px;
+}
+.taskbar.win10 .start-btn {
+  background: transparent; border-color: transparent; color: #fff; font-size: 18px;
+}
+.taskbar.macos .start-btn { display: none; }
+
+.taskbar-divider {
+  width: 1px; height: 28px; margin: 0 2px;
+  background: linear-gradient(to bottom, #808080, #fff);
+}
+.taskbar.xp .taskbar-divider, .taskbar.win7 .taskbar-divider,
+.taskbar.win10 .taskbar-divider, .taskbar.macos .taskbar-divider {
+  background: rgba(255,255,255,0.2);
+}
+
+.taskbar-windows { display: flex; gap: 3px; flex: 1; overflow: hidden; }
+
+.tb-item {
+  height: 26px; padding: 0 10px; font-size: 11px; cursor: pointer;
+  font-family: 'Noto Sans KR', sans-serif; white-space: nowrap;
+  background: #c0c0c0;
+  border-top: 1px solid #fff; border-left: 1px solid #fff;
+  border-right: 1px solid #404040; border-bottom: 1px solid #404040;
+  color: #000; transition: all 0.25s;
+}
+.tb-item.active {
+  background: #a0a0a0;
+  border-top-color: #404040; border-left-color: #404040;
+  border-right-color: #fff; border-bottom-color: #fff;
+}
+.taskbar.xp .tb-item       { background: rgba(30,80,180,0.5); border: 1px solid rgba(100,160,240,0.5); border-radius: 3px; color: #fff; }
+.taskbar.xp .tb-item.active{ background: rgba(10,50,140,0.8); border-bottom: 2px solid #ffff00; }
+.taskbar.win7 .tb-item      { background: rgba(30,80,160,0.3); border: 1px solid rgba(80,140,220,0.4); border-radius: 3px; color: #fff; }
+.taskbar.win7 .tb-item.active{ background: rgba(30,80,160,0.6); border-color: rgba(140,190,240,0.8); }
+.taskbar.win10 .tb-item     { background: transparent; border-color: transparent; border-radius: 2px; color: #ccc; }
+.taskbar.win10 .tb-item.active{ border-bottom: 2px solid #0078d4; color: #fff; }
+.taskbar.macos .tb-item     { background: transparent; border-color: transparent; color: rgba(255,255,255,0.8); font-size: 12px; }
+.taskbar.macos .tb-item.active{ color: #fff; border-bottom: 1.5px solid #fff; }
+
+.taskbar-tray {
+  display: flex; align-items: center; gap: 8px;
+  font-family: 'Noto Sans KR', sans-serif; font-size: 11px;
+  padding: 0 8px; border-left: 1px solid #808080; color: #000;
+}
+.taskbar.xp .taskbar-tray, .taskbar.win7 .taskbar-tray,
+.taskbar.win10 .taskbar-tray, .taskbar.macos .taskbar-tray {
+  color: #fff; border-color: rgba(255,255,255,0.2);
+}
+
+/* Start Menu */
+.start-menu {
+  position: fixed; bottom: 44px; left: 4px; width: 200px;
+  background: #c0c0c0;
+  border-top: 2px solid #fff; border-left: 2px solid #fff;
+  border-right: 2px solid #404040; border-bottom: 2px solid #404040;
+  display: none; z-index: 9998; box-shadow: 4px 4px 8px rgba(0,0,0,0.3);
+}
+.start-menu.open { display: block; }
+.sm-header {
+  background: #000080; color: #fff; padding: 10px 14px;
+  display: flex; align-items: center; gap: 10px;
+  font-family: 'Noto Sans KR', sans-serif; font-weight: bold; font-size: 13px;
+}
+.sm-avatar {
+  width: 28px; height: 28px; background: #ffff00; color: #000;
+  border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold;
+}
+.start-menu ul { list-style: none; padding: 4px 0; }
+.start-menu li a {
+  display: block; padding: 7px 16px;
+  font-family: 'Noto Sans KR', sans-serif; font-size: 13px; color: #000;
+}
+.start-menu li a:hover { background: #000080; color: #fff; }
+.sm-footer {
+  font-family: 'Noto Sans KR', sans-serif; font-size: 10px; color: #666;
+  padding: 6px 14px; border-top: 1px solid #808080;
+}
+
+/* ── SECTIONS ── */
+.os-section {
+  min-height: 100vh; display: flex; align-items: center; justify-content: center;
+  padding: 32px 24px 56px; position: relative;
+}
+.os-label {
+  position: absolute; bottom: 50px; right: 20px;
+  font-size: 10px; opacity: 0.45; letter-spacing: 0.08em;
+  font-family: 'Share Tech Mono', monospace;
+}
+
+/* ════ 01 HOME — Win98 ════ */
+.os-win98 {
+  background: #008080;
+  align-items: flex-start; flex-direction: row; gap: 24px; padding-top: 48px;
+}
+.os-win98 .os-label { color: #C0C0C0; }
+
+.desktop-icons {
+  display: flex; flex-direction: column; gap: 20px; padding-top: 8px; flex-shrink: 0;
+}
+.d-icon {
+  display: flex; flex-direction: column; align-items: center; gap: 3px;
+  cursor: pointer; width: 60px;
+}
+.d-icon span { font-size: 10px; color: #fff; text-align: center; font-family: 'Noto Sans KR', sans-serif; }
+.d-icon-img { width: 32px; height: 32px; font-size: 28px; text-align: center; }
+
+/* Override 98.css window for hero */
+.home-window { flex: 1; max-width: 900px; }
+.home-window .window-body {
+  background: #f5f0e8; padding: 28px; display: flex; gap: 32px; min-height: 460px;
+}
+.home-hero { flex: 1; display: flex; flex-direction: column; gap: 10px; }
+.hero-name { font-size: 110px; line-height: 1; letter-spacing: -2px; color: #1a1a1a; }
+.cursor-blink { color: #000080; animation: blink 1s step-end infinite; }
+@keyframes blink { 50% { opacity: 0; } }
+.hero-sub { font-size: 15px; color: #444; }
+.hero-tag { background: #ffff00; padding: 3px 10px; font-size: 13px; font-weight: bold; width: fit-content; }
+.hero-magenta { width: 110px; height: 3px; background: #ff00ff; }
+.hero-enter {
+  display: inline-block; padding: 6px 14px; font-size: 13px;
+  font-family: 'Noto Sans KR', sans-serif; width: fit-content; cursor: pointer;
+}
+
+.floppy {
+  width: 180px; background: #1a1a1a; border-radius: 6px;
+  padding: 8px; display: flex; flex-direction: column; gap: 8px; flex-shrink: 0;
+}
+.floppy-label {
+  background: #f5f0e8; padding: 8px;
+  display: flex; flex-direction: column; gap: 4px; flex: 1;
+}
+.floppy-label p { font-size: 9px; color: #000080; font-weight: bold; font-family: 'Noto Sans KR', sans-serif; }
+.floppy-sub { font-size: 8px !important; color: #444 !important; }
+.floppy-accent { width: 70px; height: 2px; background: #ff00ff; }
+.floppy-size { font-size: 8px !important; color: #888 !important; font-family: 'Share Tech Mono', monospace !important; }
+.floppy-shutter { height: 14px; background: #888; border-radius: 2px; }
+.home-prompt { font-size: 11px; color: #888; margin-top: 6px; font-family: 'Share Tech Mono', monospace; }
+
+/* ════ 02 ABOUT — XP ════ */
+.os-winxp { background: #244eab; }
+.os-winxp .os-label { color: #aaceff; }
+
+/* XP.css scope — wrap in .xp class to avoid bleed */
+.xp-scope { width: 100%; max-width: 1160px; }
+.xp-scope .window { border-radius: 6px 6px 0 0; overflow: hidden; }
+
+.paint-layout { display: flex; min-height: 540px; }
+.paint-tools-panel {
+  width: 54px; background: #ece9d8; border-right: 1px solid #aca899;
+  padding: 6px 4px; display: flex; flex-direction: column; align-items: center; gap: 6px;
+}
+.tool-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+.ptool {
+  width: 22px; height: 22px; font-size: 12px;
+  background: #ece9d8; border: 1px solid #aca899; border-radius: 2px;
+  display: flex; align-items: center; justify-content: center; cursor: pointer;
+}
+.ptool.sel { background: #ffff00; }
+.ptool:hover { background: #cde4f7; }
+.pfg { width: 22px; height: 18px; background: #000; border: 1px solid #aca899; }
+.pbg { width: 22px; height: 18px; background: #fff; border: 1px solid #aca899; margin-top: 4px; }
+
+.paint-canvas-area { flex: 1; background: #f5f0e8; padding: 18px; overflow: auto; }
+.about-inner { display: flex; gap: 28px; }
+.about-ojects { flex-shrink: 0; width: 280px; display: flex; flex-direction: column; gap: 10px; }
+
+/* Win98 pixel icon objects on canvas */
+.canvas-objects {
+  width: 280px; height: 220px; background: #fff; border: 1px solid #aca899;
+  position: relative; overflow: hidden;
+}
+.obj-label {
+  position: absolute; top: 8px; left: 8px;
+  font-family: 'Share Tech Mono', monospace; font-size: 10px; color: #aca899;
+}
+.obj-icons {
+  display: flex; flex-wrap: wrap; gap: 16px; padding: 32px 16px 16px;
+  align-items: center; justify-content: center;
+}
+.obj-icon { display: flex; flex-direction: column; align-items: center; gap: 3px; }
+.obj-icon span:first-child { font-size: 32px; }
+.obj-icon span:last-child { font-size: 9px; color: #444; font-family: 'Share Tech Mono', monospace; }
+
+.name-box {
+  background: #fff; border: 1px solid #aca899; padding: 12px;
+  display: flex; flex-direction: column; gap: 4px;
+}
+.name-big { font-size: 48px; color: #000080; line-height: 1; font-family: 'VT323', monospace; }
+.name-sub { font-size: 11px; color: #444; font-family: 'Noto Sans KR', sans-serif; }
+.name-squig { height: 3px; background: #ff00ff; width: 100%; margin-top: 4px; }
+
+.about-text-panel { flex: 1; display: flex; flex-direction: column; gap: 14px; padding-top: 4px; }
+.about-title { font-size: 28px; color: #2a7fd4; font-family: 'VT323', monospace; }
+.about-acc { height: 2px; background: #2a7fd4; margin-bottom: -10px; }
+.about-acc2 { height: 1px; background: #ff00ff; }
+.about-body { font-size: 14px; color: #1a1a1a; line-height: 1.8; font-family: 'Noto Sans KR', sans-serif; }
+.about-body.sub { color: #555; }
+.stamps { display: flex; gap: 8px; flex-wrap: wrap; }
+.stamp {
+  padding: 5px 12px; font-size: 12px; font-weight: bold; border-radius: 2px;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+.stamp-m { border: 2px dashed #ff00ff; color: #ff00ff; }
+.stamp-b { border: 2px dashed #2a7fd4; color: #2a7fd4; }
+.stamp-y { background: #ffff00; border: 1.5px solid #000; color: #000; }
+.about-info { display: flex; flex-direction: column; gap: 7px; border-top: 1px solid #aca899; border-bottom: 1px solid #aca899; padding: 10px 0; }
+.info-row { display: flex; gap: 10px; align-items: baseline; }
+.ik { font-size: 11px; color: #888; min-width: 70px; font-family: 'Share Tech Mono', monospace; }
+.iv { font-size: 12px; color: #1a1a1a; font-family: 'Noto Sans KR', sans-serif; }
+.iv.badge { background: #ffff00; padding: 1px 7px; font-weight: bold; }
+.about-note { font-size: 10px; color: #999; font-family: 'Share Tech Mono', monospace; }
+.magenta-bar { height: 3px; background: #ff00ff; width: 240px; }
+
+.xp-palette {
+  background: #c0c0c0; border-top: 1px solid #aca899;
+  padding: 5px 10px; display: flex; gap: 3px; align-items: center;
+}
+.ps { width: 18px; height: 13px; border: 1px solid #808080; cursor: pointer; }
+.ps.hi { border: 2px solid #2a7fd4; }
+
+/* ════ 03 SKILL — Win7 ════ */
+.os-win7 { background: #162030; }
+.os-win7 .os-label { color: #6090c0; }
+
+.w7-scope { width: 100%; max-width: 1160px; }
+
+/* 7.css window override */
+.w7-scope .window {
+  background: rgba(220,232,248,0.92) !important;
+  border: 1px solid #6090c0 !important;
+  box-shadow: 0 0 0 1px rgba(255,255,255,0.15) inset, 0 8px 32px rgba(0,0,0,0.6) !important;
+}
+.w7-scope .title-bar {
+  background: linear-gradient(to bottom, #b8ccdc, #8aaac8) !important;
+  border-bottom: 1px solid #6090c0 !important;
+}
+.w7-scope .title-bar-text { color: #1a2a3a !important; font-family: 'Noto Sans KR', sans-serif !important; font-size: 12px !important; }
+
+.w7-body { display: flex; min-height: 500px; }
+.w7-sidebar {
+  width: 200px; background: rgba(180,200,224,0.5);
+  border-right: 1px solid #6090c0; padding: 10px 8px;
+  display: flex; flex-direction: column; gap: 2px;
+}
+.w7-sidebar p {
+  font-size: 12px; padding: 4px 6px; border-radius: 2px; cursor: pointer;
+  font-family: 'Noto Sans KR', sans-serif; color: #2a3a4a;
+}
+.w7-sidebar p:hover { background: rgba(26,80,160,0.1); }
+.w7-sidebar p.active { background: rgba(26,80,160,0.18); color: #1a5090; font-weight: bold; }
+.w7-sidebar p.ind { padding-left: 18px; }
+.w7-sidebar p.ind2 { padding-left: 32px; }
+
+.w7-content { flex: 1; background: rgba(224,234,248,0.5); display: flex; flex-direction: column; }
+.w7-col {
+  background: rgba(196,214,232,0.6); border-bottom: 1px solid #6090c0;
+  padding: 5px 14px; display: grid;
+  grid-template-columns: 1fr 160px 180px; font-size: 11px;
+  font-family: 'Noto Sans KR', sans-serif; color: #444;
+}
+.skill-list { display: flex; flex-direction: column; }
+.sk-row {
+  display: grid; grid-template-columns: 42px 1fr 160px 180px;
+  align-items: center; gap: 10px; padding: 13px 14px;
+  border-bottom: 1px solid rgba(96,144,192,0.25);
+  transition: background 0.15s;
+}
+.sk-row:hover { background: rgba(26,80,160,0.06); }
+.sk-row.sel { background: rgba(26,80,160,0.14); border: 1px solid rgba(26,80,160,0.3); }
+.sk-folder {
+  width: 34px; height: 28px; background: #ffd700;
+  border: 1px solid #c8960c; border-radius: 2px; position: relative; flex-shrink: 0;
+}
+.sk-folder::before {
+  content: ''; position: absolute; top: -6px; left: 0;
+  width: 14px; height: 7px; background: #ffd700; border: 1px solid #c8960c; border-radius: 2px 2px 0 0;
+}
+.sk-info { display: flex; flex-direction: column; gap: 2px; }
+.sk-info strong { font-size: 13px; color: #1a2a3a; font-family: 'Noto Sans KR', sans-serif; }
+.sk-sub { font-size: 11px; color: #555; font-family: 'Noto Sans KR', sans-serif; }
+.sk-count { font-size: 10px; color: #888; font-family: 'Share Tech Mono', monospace; }
+.sk-type { font-size: 11px; color: #555; font-family: 'Noto Sans KR', sans-serif; }
+.sk-bar-wrap { display: flex; flex-direction: column; gap: 4px; }
+.sk-bar { width: 150px; height: 11px; background: #c8d8e8; border: 1px solid #6090c0; border-radius: 6px; overflow: hidden; }
+.sk-fill { height: 100%; border-radius: 6px; }
+.sk-fill.y { background: #ffff00; }
+.sk-fill.m { background: #ff00ff; opacity: 0.75; }
+.sk-fill.g { background: #c0c0c0; }
+.sk-lv { font-size: 10px; color: #1a5090; font-family: 'Noto Sans KR', sans-serif; }
+.sk-lv.dim { color: #888; }
+.w7-status {
+  background: rgba(196,214,232,0.6); border-top: 1px solid #6090c0;
+  padding: 5px 12px; font-size: 11px; color: #444;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+/* ════ 04 WORKS — Win10 ════ */
+.os-win10 { background: #1c1c1c; }
+.os-win10 .os-label { color: #666; }
+
+.w10-window {
+  width: 100%; max-width: 1160px;
+  background: #f8f8f8;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.6);
+  border-top: 1px solid #0078d4;
+}
+.w10-titlebar {
+  background: #f0f0f0; padding: 0 0 0 12px;
+  display: flex; align-items: center; border-bottom: 1px solid #e0e0e0; height: 32px;
+}
+.w10-title { flex: 1; font-size: 12px; color: #1c1c1c; font-weight: bold; font-family: 'Noto Sans KR', sans-serif; }
+.w10-btns { display: flex; }
+.w10-btn {
+  width: 46px; height: 32px; font-size: 12px; color: #666;
+  background: transparent; border: none; cursor: pointer; transition: background 0.15s;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+.w10-btn:hover { background: #e0e0e0; }
+.w10-btn.cls:hover { background: #e81123; color: #fff; }
+
+.w10-ribbon {
+  background: #f0f0f0; border-bottom: 1px solid #e0e0e0;
+  padding: 4px 12px; display: flex; align-items: center; justify-content: space-between;
+}
+.w10-tabs { display: flex; }
+.w10-tab {
+  padding: 4px 14px; font-size: 11px; color: #444; cursor: pointer;
+  border-bottom: 2px solid transparent; font-family: 'Noto Sans KR', sans-serif;
+}
+.w10-tab.active { border-bottom-color: #0078d4; color: #0078d4; }
+.w10-search {
+  background: #fff; border: 1px solid #ccc; border-radius: 2px;
+  padding: 3px 12px; font-size: 11px; color: #888; width: 200px;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+.w10-addr {
+  background: #fff; border-bottom: 1px solid #e0e0e0;
+  padding: 5px 14px; font-size: 11px; color: #666;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+.w10-addr span { color: #0078d4; cursor: pointer; }
+
+.w10-colhdr {
+  background: #f0f0f0; border-bottom: 1px solid #e0e0e0;
+  padding: 5px 14px; display: grid;
+  grid-template-columns: 56px 1fr 140px 90px 380px;
+  font-size: 11px; color: #444; font-family: 'Noto Sans KR', sans-serif;
+}
+.w10-projects { display: flex; flex-direction: column; background: #fff; }
+.proj-row {
+  display: grid; grid-template-columns: 56px 1fr 140px 90px 380px;
+  align-items: center; gap: 10px; padding: 13px 14px;
+  border-bottom: 1px solid #e0e0e0; position: relative; transition: background 0.15s;
+}
+.proj-row:hover { background: #e5f1fb; }
+.proj-row.hl { background: #e5f1fb; }
+.proj-accent { position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: #0078d4; }
+
+.vhs {
+  width: 48px; height: 34px; border-radius: 4px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+}
+.vhs span { font-size: 6px; color: #fff; font-family: 'Share Tech Mono', monospace; letter-spacing: 0.04em; }
+.vhs.navy   { background: #000080; }
+.vhs.purple { background: #1a0033; }
+.vhs.red    { background: #cc0000; }
+.vhs.indigo { background: #2a1a4a; }
+
+.proj-info { display: flex; flex-direction: column; gap: 3px; }
+.proj-name { font-size: 14px; color: #1c1c1c; font-weight: bold; font-family: 'Noto Sans KR', sans-serif; }
+.proj-name.blue { color: #0078d4; }
+.proj-line { height: 2px; width: 90px; background: #ff00ff; margin: 1px 0; }
+.proj-desc { font-size: 11px; color: #444; font-family: 'Noto Sans KR', sans-serif; }
+.proj-sub  { font-size: 11px; color: #888; font-family: 'Noto Sans KR', sans-serif; }
+.proj-type { font-size: 11px; color: #444; font-family: 'Noto Sans KR', sans-serif; }
+.proj-date { font-size: 11px; color: #444; font-family: 'Share Tech Mono', monospace; }
+
+.proj-preview {
+  height: 86px; border-radius: 4px; overflow: hidden;
+  display: flex; align-items: center;
+}
+.prev-moodvie {
+  background: #000033; gap: 5px; padding: 6px; flex-wrap: nowrap;
+  position: relative;
+}
+.mv-card {
+  width: 56px; height: 72px; border-radius: 2px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; flex-shrink: 0;
+}
+.mv-card span:first-child { font-size: 7px; font-family: 'Share Tech Mono', monospace; }
+.mv-card .st { font-size: 7px; color: #ffff00; font-family: 'Share Tech Mono', monospace; }
+.mv-card.h { background: #1a0033; color: #ff00ff; }
+.mv-card.s { background: #001a33; color: #00ffff; }
+.mv-card.d { background: #1a1a00; color: #ffff00; }
+.mv-logo { position: absolute; right: 6px; font-size: 18px; color: #ffff00; font-family: 'VT323', monospace; }
+
+.prev-cinema {
+  background: #0a0a1a; flex-direction: column; justify-content: center;
+  align-items: center; gap: 4px; padding: 8px;
+}
+.prev-cinema p:first-child { font-size: 13px; color: #f5f0e8; font-style: italic; font-family: 'Noto Sans KR', sans-serif; }
+.prev-cinema p:last-child { font-size: 8px; color: #888; font-family: 'Noto Sans KR', sans-serif; }
+.cinema-play { font-size: 8px; color: #ff00ff; font-family: 'Share Tech Mono', monospace; }
+
+.prev-daiso {
+  background: #fff; flex-direction: column; justify-content: center;
+  padding: 8px; gap: 6px; border: 1px solid #e0e0e0;
+}
+.prev-daiso p { font-size: 9px; color: #444; font-family: 'Noto Sans KR', sans-serif; }
+.atags { display: flex; gap: 4px; }
+.atag {
+  padding: 2px 7px; border-radius: 2px; font-size: 8px;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+.atag.y { background: #ffff00; color: #000; }
+.atag.m { background: #ff00ff; color: #fff; opacity: 0.75; }
+.atag.g { background: #e0e0e0; color: #444; }
+
+.prev-exhibit {
+  background: #f8f5f0; flex-direction: column; justify-content: center;
+  padding: 8px; gap: 6px; border: 1px solid #e0e0e0;
+}
+.prev-exhibit p { font-size: 11px; color: #2a1a4a; font-weight: bold; font-family: 'Noto Sans KR', sans-serif; }
+.etags { display: flex; gap: 4px; }
+.etag { padding: 2px 7px; border-radius: 2px; font-size: 7px; font-family: 'Share Tech Mono', monospace; }
+.etag.n { background: #2a1a4a; color: #ff00ff; }
+.etag.p { background: #1a0033; color: #ffff00; }
+.etag.t { background: #003322; color: #00ffff; }
+
+.w10-status {
+  background: #f0f0f0; border-top: 1px solid #e0e0e0;
+  padding: 4px 14px; font-size: 11px; color: #444;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+/* ════ 05 CONTACT — macOS ════ */
+.os-macos {
+  background: linear-gradient(150deg, #3b2d6e 0%, #6b3fa0 38%, #c86b8a 68%, #e8a87c 100%);
+  flex-direction: column; align-items: center; justify-content: flex-start; padding-top: 0; gap: 0;
+}
+.os-macos .os-label { color: rgba(255,255,255,0.5); }
+
+.mac-menubar {
+  width: 100%; background: rgba(255,255,255,0.16); backdrop-filter: blur(20px);
+  padding: 4px 16px; display: flex; align-items: center; gap: 16px;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+.mac-apple { font-size: 14px; color: #fff; }
+.mac-mi { font-size: 12px; color: #fff; cursor: pointer; font-family: 'Noto Sans KR', sans-serif; }
+.mac-mi.bd { font-weight: bold; }
+.mac-tray { margin-left: auto; display: flex; gap: 8px; font-size: 11px; color: #fff; align-items: center; font-family: 'Noto Sans KR', sans-serif; }
+
+.mac-win {
+  width: 100%; max-width: 960px;
+  background: rgba(245,245,247,0.96); border-radius: 12px;
+  overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.45);
+  margin: 20px 0 14px; position: relative;
+}
+.mac-titlebar {
+  background: linear-gradient(to bottom, #ebebeb, #d4d4d4);
+  padding: 10px 16px; display: flex; align-items: center;
+  border-bottom: 1px solid #c8c8c8; position: relative; height: 44px;
+}
+.tl-wrap { display: flex; gap: 8px; }
+.tl {
+  width: 13px; height: 13px; border-radius: 50%; cursor: pointer;
+  transition: filter 0.15s;
+}
+.tl:hover { filter: brightness(0.85); }
+.tl-r { background: #ff5f57; border: 1px solid #e04040; }
+.tl-y { background: #febc2e; border: 1px solid #c89020; }
+.tl-g { background: #28c840; border: 1px solid #14a030; }
+.mac-wintitle {
+  position: absolute; left: 50%; transform: translateX(-50%);
+  font-size: 13px; color: #1c1c1e; font-weight: bold;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+.mac-toolbar {
+  background: #fafafa; border-bottom: 1px solid #e0e0e0;
+  padding: 8px 16px; display: flex; align-items: center; gap: 12px;
+}
+.mac-send {
+  background: #007aff; color: #fff; border-radius: 12px;
+  padding: 4px 16px; font-size: 12px; font-weight: bold; cursor: pointer;
+  font-family: 'Noto Sans KR', sans-serif; border: none;
+}
+.mac-ti { font-size: 16px; color: #888; cursor: pointer; }
+.mac-field {
+  background: #fafafa; border-bottom: 1px solid #e8e8e8;
+  padding: 9px 16px; display: flex; align-items: center; gap: 10px;
+}
+.mac-fl { font-size: 12px; color: #8e8e93; min-width: 58px; font-family: 'Noto Sans KR', sans-serif; }
+.mac-chip {
+  background: rgba(0,122,255,0.12); border-radius: 11px;
+  padding: 2px 10px; font-size: 12px; color: #007aff;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+.mac-subj { font-size: 12px; color: #1c1c1e; font-weight: bold; font-family: 'Noto Sans KR', sans-serif; }
+
+.mac-body {
+  background: #fff; padding: 22px; display: flex; flex-direction: column; gap: 14px; position: relative;
+}
+.mac-body p { font-family: 'Noto Sans KR', sans-serif; font-size: 14px; color: #1c1c1e; }
+.mac-body p.sub { color: #636366; font-size: 13px; }
+.mac-hl {
+  background: rgba(255,255,0,0.45); padding: 3px 0; border-radius: 4px;
+}
+.c-cards { display: flex; gap: 12px; flex-wrap: wrap; }
+.c-card {
+  background: #f2f2f7; border-radius: 12px; padding: 14px 16px;
+  display: flex; flex-direction: column; gap: 6px; min-width: 190px;
+  position: relative; overflow: hidden;
+}
+.c-acc { height: 4px; position: absolute; top: 0; left: 0; right: 0; }
+.c-acc.b { background: #007aff; }
+.c-acc.d { background: #1c1c1e; }
+.c-acc.m { background: #ff00ff; }
+.c-lbl { font-size: 10px; color: #8e8e93; margin-top: 10px; font-family: 'Share Tech Mono', monospace; }
+.c-vbox { background: #ffff00; padding: 2px 8px; border-radius: 4px; font-size: 13px; font-weight: bold; color: #000; width: fit-content; font-family: 'Noto Sans KR', sans-serif; }
+.c-val { font-size: 13px; font-weight: bold; color: #1c1c1e; font-family: 'Noto Sans KR', sans-serif; }
+.c-line { height: 2px; width: 60px; border-radius: 1px; }
+.c-line.m { background: #ff00ff; }
+.c-line.y { background: #ffff00; }
+.c-hint { font-size: 11px; color: #8e8e93; font-family: 'Noto Sans KR', sans-serif; }
+
+.mac-sep { height: 1px; background: #e8e8e8; }
+.mac-sign { font-size: 13px; color: #636366; font-family: 'Noto Sans KR', sans-serif; }
+.mac-note { font-size: 11px; color: #aeaeb2; font-family: 'Share Tech Mono', monospace; }
+.mac-lines { display: flex; flex-direction: column; gap: 4px; }
+.mac-lm { width: 300px; height: 2px; background: #ff00ff; border-radius: 1px; }
+.mac-ly { width: 150px; height: 2px; background: #ffff00; border-radius: 1px; }
+
+.mac-notif {
+  position: absolute; top: 14px; right: 14px; width: 250px;
+  background: #fff; border-radius: 14px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.16); border: 1px solid #e8e8e8;
+  padding: 12px; display: flex; gap: 10px; align-items: flex-start;
+  animation: slideNotif 0.4s ease 1.8s both;
+}
+@keyframes slideNotif { from { transform: translateX(270px); opacity: 0; } to { transform: none; opacity: 1; } }
+.notif-ico { font-size: 22px; flex-shrink: 0; }
+.notif-body strong { font-size: 12px; color: #1c1c1e; display: block; font-family: 'Noto Sans KR', sans-serif; }
+.notif-body p { font-size: 11px; color: #636366; font-family: 'Noto Sans KR', sans-serif; }
+.notif-acts { display: flex; gap: 6px; margin-top: 8px; }
+.nb { padding: 3px 12px; border-radius: 11px; font-size: 11px; cursor: pointer; font-family: 'Noto Sans KR', sans-serif; background: #f2f2f7; border: none; }
+.nb.p { background: #007aff; color: #fff; }
+
+.mac-dock {
+  background: rgba(255,255,255,0.22); backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,0.35); border-radius: 18px;
+  padding: 7px 12px; display: flex; gap: 6px; align-items: flex-end; margin-bottom: 14px;
+}
+.di { display: flex; flex-direction: column; align-items: center; gap: 3px; cursor: pointer; transition: transform 0.15s; }
+.di:hover { transform: scale(1.2) translateY(-4px); }
+.di-icon {
+  width: 42px; height: 42px; border-radius: 11px;
+  display: flex; align-items: center; justify-content: center; font-size: 22px;
+}
+.di-icon.b { background: #007aff; }
+.di-icon.r { background: #ff5f57; }
+.di-icon.y { background: #febc2e; }
+.di-icon.g { background: #28c840; }
+.di-icon.gr{ background: #636366; }
+.d-divider { width: 1px; height: 42px; background: rgba(255,255,255,0.4); margin: 0 2px; }
+.d-dot { width: 4px; height: 4px; background: #fff; border-radius: 50%; opacity: 0.8; }
+
+/* ── Scope: load XP + 7 only for their sections via JS dynamic link ── */
+/* WIN98 section: ensure 98.css buttons look correct */
+#home .title-bar-controls button {
+  width: 16px !important;
+  height: 14px !important;
+  padding: 0 !important;
+  min-width: 0 !important;
+  margin-left: 2px !important;
+  background: #c0c0c0 !important;
+  border-top: 1px solid #fff !important;
+  border-left: 1px solid #fff !important;
+  border-right: 1px solid #808080 !important;
+  border-bottom: 1px solid #808080 !important;
+  box-shadow: inset 1px 1px 0 #dfdfdf, inset -1px -1px 0 #404040 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+#home .title-bar {
+  background: linear-gradient(to right, #000080, #1084d0) !important;
+  padding: 3px 4px 3px 6px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+}
+#home .title-bar-text {
+  color: #fff !important;
+  font-weight: bold !important;
+  font-size: 12px !important;
+}
+#home .title-bar-controls {
+  display: flex !important;
+  gap: 2px !important;
+}
+#home .title-bar-controls button[aria-label="Minimize"]::before { content: ''; display: block; width: 6px; height: 2px; background: #000; margin-top: 6px; }
+#home .title-bar-controls button[aria-label="Maximize"]::before { content: ''; display: block; width: 7px; height: 6px; border: 1.5px solid #000; background: transparent; margin-top: 2px; }
+#home .title-bar-controls button[aria-label="Close"]::before { content: '✕'; font-size: 9px; color: #000; line-height: 1; }
+
+/* HOME window size */
+.home-window { flex: 1; max-width: 1000px !important; min-height: 500px; }
+.home-window > .window-body { min-height: 500px !important; }
+
+/* Desktop icon nav */
+.desktop-icons { position: relative; }
+.d-icon.my-comp { position: relative; }
+.sub-icons {
+  display: none;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 12px;
+  padding: 8px 0;
+  background: rgba(0,0,0,0.25);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 2px;
+  animation: fadeIn 0.2s ease;
+}
+.sub-icons.open { display: flex; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: none; } }
+
+/* Typing effect */
+.hero-name { font-size: 100px !important; }
+.typed-char {
+  display: inline-block;
+  opacity: 0;
+  animation: typeIn 0.08s forwards;
+}
+@keyframes typeIn { to { opacity: 1; } }
+
+</style>
+</head>
+<body>
+
+<!-- ═══ TASKBAR ═══ -->
+<nav class="taskbar" id="taskbar">
+  <button class="start-btn f-kr" id="startBtn">⊞ Start</button>
+  <div class="taskbar-divider"></div>
+  <div class="taskbar-windows">
+    <button class="tb-item active f-kr" data-sec="home">JIMI.EXE</button>
+    <button class="tb-item f-kr" data-sec="about">Paint</button>
+    <button class="tb-item f-kr" data-sec="skill">Explorer</button>
+    <button class="tb-item f-kr" data-sec="works">Works</button>
+    <button class="tb-item f-kr" data-sec="contact">Mail</button>
+  </div>
+  <div class="taskbar-tray">
+    <span>🔊</span>
+    <span id="clock" class="f-kr"></span>
+  </div>
+</nav>
+
+<!-- Start Menu -->
+<div class="start-menu" id="startMenu">
+  <div class="sm-header"><div class="sm-avatar">J</div><span>JIMI</span></div>
+  <ul>
+    <li><a href="#home" class="f-kr">🖥 HOME</a></li>
+    <li><a href="#about" class="f-kr">🎨 ABOUT</a></li>
+    <li><a href="#skill" class="f-kr">📁 SKILL</a></li>
+    <li><a href="#works" class="f-kr">📼 WORKS</a></li>
+    <li><a href="#contact" class="f-kr">✉ CONTACT</a></li>
+  </ul>
+  <div class="sm-footer f-kr">시각디자인과 · 2024</div>
+</div>
+
+<!-- ═══════════════════════════════════
+     01 HOME — Windows 98
+═══════════════════════════════════ -->
+<section id="home" class="os-section os-win98">
+  <div class="desktop-icons">
+    <div class="d-icon my-comp" id="myCompIcon" onclick="toggleSubIcons(event)">
+      <div class="d-icon-img">🖥</div>
+      <span class="f-kr">My Computer</span>
+    </div>
+    <div class="sub-icons" id="subIcons">
+      <div class="d-icon" onclick="goTo('home')">
+        <div class="d-icon-img" style="font-size:22px;">🏠</div>
+        <span class="f-kr">Home</span>
+      </div>
+      <div class="d-icon" onclick="goTo('about')">
+        <div class="d-icon-img" style="font-size:22px;">🎨</div>
+        <span class="f-kr">About</span>
+      </div>
+      <div class="d-icon" onclick="goTo('skill')">
+        <div class="d-icon-img" style="font-size:22px;">📁</div>
+        <span class="f-kr">Skill</span>
+      </div>
+      <div class="d-icon" onclick="goTo('works')">
+        <div class="d-icon-img" style="font-size:22px;">📼</div>
+        <span class="f-kr">Works</span>
+      </div>
+      <div class="d-icon" onclick="goTo('contact')">
+        <div class="d-icon-img" style="font-size:22px;">✉️</div>
+        <span class="f-kr">Contact</span>
+      </div>
+    </div>
+    <div class="d-icon">
+      <div class="d-icon-img">🗑</div>
+      <span class="f-kr">Recycle Bin</span>
+    </div>
+  </div>
+
+  <div class="window home-window">
+    <div class="title-bar">
+      <div class="title-bar-text f-kr">JIMI.EXE — Portfolio v1.0</div>
+      <div class="title-bar-controls">
+        <button aria-label="Minimize"></button>
+        <button aria-label="Maximize"></button>
+        <button aria-label="Close"></button>
+      </div>
+    </div>
+    <div class="window-body home-window-body" style="background:#f5f0e8;padding:28px;display:flex;gap:32px;min-height:460px;">
+      <div class="home-hero">
+        <h1 class="hero-name f-vt" id="heroName"><span class="cursor-blink" id="heroCursor">_</span></h1>
+        <p class="hero-sub f-kr">Visual Designer · Web · Graphic</p>
+        <div class="hero-tag f-kr">시각디자인과</div>
+        <div class="hero-magenta"></div>
+        <a href="#about" class="button hero-enter f-kr">▶ ENTER PORTFOLIO</a>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:10px;flex-shrink:0;">
+        <div class="floppy">
+          <div class="floppy-label">
+            <p class="f-kr">PORTFOLIO_2026.exe</p>
+            <p class="floppy-sub f-kr">시각디자인과</p>
+            <div class="floppy-accent"></div>
+            <p class="floppy-size f-mono">1.44 MB  3.5" HD</p>
+          </div>
+          <div class="floppy-shutter"></div>
+        </div>
+        <p class="home-prompt f-mono">C:\USERS\JIMI&gt;_</p>
+      </div>
+    </div>
+    <div class="status-bar">
+      <p class="status-bar-field f-kr">준비</p>
+      <p class="status-bar-field f-mono">5 objects</p>
+    </div>
+  </div>
+  <div class="os-label">OS: Windows 98</div>
+</section>
+
+<!-- ═══════════════════════════════════
+     02 ABOUT — Windows XP
+═══════════════════════════════════ -->
+<section id="about" class="os-section os-winxp">
+  <div class="xp-scope" style="--xp-color-blue:#2a7fd4;">
+    <div class="window">
+      <div class="title-bar">
+        <div class="title-bar-text f-kr">🎨 untitled — Paint</div>
+        <div class="title-bar-controls">
+          <button aria-label="Minimize"></button>
+          <button aria-label="Maximize"></button>
+          <button aria-label="Close"></button>
+        </div>
+      </div>
+      <div class="window-body" style="padding:0;">
+        <div style="background:#ece9d8;padding:3px 8px;border-bottom:1px solid #aca899;display:flex;gap:20px;">
+          <span class="f-kr" style="font-size:12px;">File</span>
+          <span class="f-kr" style="font-size:12px;">Edit</span>
+          <span class="f-kr" style="font-size:12px;">View</span>
+          <span class="f-kr" style="font-size:12px;">Image</span>
+          <span class="f-kr" style="font-size:12px;">Options</span>
+        </div>
+        <div class="paint-layout">
+          <!-- Tools -->
+          <div class="paint-tools-panel">
+            <div class="tool-grid">
+              <div class="ptool">✦</div><div class="ptool">⬚</div>
+              <div class="ptool">⌫</div><div class="ptool">⬛</div>
+              <div class="ptool">✒</div><div class="ptool">🔍</div>
+              <div class="ptool sel">A</div><div class="ptool">✏</div>
+              <div class="ptool">▭</div><div class="ptool">○</div>
+            </div>
+            <div class="pfg"></div>
+            <div class="pbg"></div>
+          </div>
+          <!-- Canvas -->
+          <div class="paint-canvas-area">
+            <div class="about-inner">
+              <!-- Left: objects -->
+              <div class="about-ojects">
+                <div class="canvas-objects">
+                  <span class="obj-label f-mono">// jimi.bmp</span>
+                  <div class="obj-icons">
+                    <div class="obj-icon">
+                      <span>💾</span><span class="f-mono">work</span>
+                    </div>
+                    <div class="obj-icon">
+                      <span>🖱</span><span class="f-mono">web</span>
+                    </div>
+                    <div class="obj-icon">
+                      <span>🎨</span><span class="f-mono">design</span>
+                    </div>
+                    <div class="obj-icon">
+                      <span>📁</span><span class="f-mono">archive</span>
+                    </div>
+                    <div class="obj-icon">
+                      <span>📐</span><span class="f-mono">layout</span>
+                    </div>
+                    <div class="obj-icon">
+                      <span>✏️</span><span class="f-mono">sketch</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="name-box">
+                  <div class="name-big f-vt">JIMI</div>
+                  <div class="name-sub f-kr">시각디자인과</div>
+                  <div class="name-squig"></div>
+                </div>
+              </div>
+              <!-- Right: text -->
+              <div class="about-text-panel">
+                <div class="about-title f-vt">ABOUT.txt</div>
+                <div class="about-acc"></div>
+                <div class="about-acc2"></div>
+                <p class="about-body f-kr">시각디자인과에서<br>웹과 그래픽 사이를 오가며 작업합니다.</p>
+                <p class="about-body sub f-kr">사람을 잇는 디자인을 하기 위해 공부 중이고,<br>디자인이 맥락과 만날 때 어떤 일이 생기는지<br>관심이 많습니다.</p>
+                <div class="stamps">
+                  <span class="stamp stamp-m f-kr">Visual Design</span>
+                  <span class="stamp stamp-b f-kr">Web Dev</span>
+                  <span class="stamp stamp-y f-kr">Arts Admin</span>
+                </div>
+                <div class="about-info">
+                  <div class="info-row"><span class="ik">FIELD</span><span class="iv f-kr">시각디자인과</span></div>
+                  <div class="info-row"><span class="ik">INTEREST</span><span class="iv f-kr">Web · Graphic · Exhibition · UX</span></div>
+                  <div class="info-row"><span class="ik">TOOLS</span><span class="iv f-kr">Figma · HTML/CSS/JS · Illustrator</span></div>
+                  <div class="info-row"><span class="ik">STATUS</span><span class="iv badge f-kr">시각디자인 공부 중</span></div>
+                </div>
+                <p class="about-note f-mono">// drawn with MS Paint XP edition</p>
+                <div class="magenta-bar"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="xp-palette">
+          <div class="ps" style="background:#000"></div>
+          <div class="ps" style="background:#808080"></div>
+          <div class="ps" style="background:#c0c0c0"></div>
+          <div class="ps" style="background:#ff0000"></div>
+          <div class="ps hi" style="background:#ff00ff"></div>
+          <div class="ps hi" style="background:#ffff00"></div>
+          <div class="ps" style="background:#00ff00"></div>
+          <div class="ps" style="background:#00ffff"></div>
+          <div class="ps" style="background:#2a7fd4"></div>
+          <div class="ps" style="background:#000080"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="os-label">OS: Windows XP</div>
+</section>
+
+<!-- ═══════════════════════════════════
+     03 SKILL — Windows 7
+═══════════════════════════════════ -->
+<section id="skill" class="os-section os-win7">
+  <div class="w7-scope">
+    <div class="window">
+      <div class="title-bar">
+        <div class="title-bar-text f-kr">📁 C:\JIMI\SKILLS — Windows Explorer</div>
+        <div class="title-bar-controls">
+          <button aria-label="Minimize"></button>
+          <button aria-label="Maximize"></button>
+          <button aria-label="Close"></button>
+        </div>
+      </div>
+      <div class="window-body" style="padding:0;">
+        <!-- Toolbar -->
+        <div style="background:rgba(200,218,238,0.6);border-bottom:1px solid #6090c0;padding:5px 10px;display:flex;align-items:center;gap:8px;">
+          <button class="f-kr" style="padding:3px 10px;font-size:11px;background:rgba(136,184,232,0.5);border:1px solid #6090c0;border-radius:4px;color:#fff;cursor:pointer;">◀</button>
+          <button class="f-kr" style="padding:3px 10px;font-size:11px;background:rgba(136,184,232,0.3);border:1px solid #6090c0;border-radius:4px;color:#fff;cursor:pointer;">▶</button>
+          <div style="flex:1;background:rgba(255,255,255,0.55);border:1px solid #6090c0;border-radius:12px;padding:3px 12px;font-size:11px;color:#444;font-family:'Noto Sans KR',sans-serif;">
+            Libraries ▸ JIMI ▸ <strong>SKILLS</strong>
+          </div>
+          <div style="background:rgba(255,255,255,0.55);border:1px solid #6090c0;border-radius:12px;padding:3px 12px;font-size:11px;color:#888;width:170px;font-family:'Noto Sans KR',sans-serif;">🔍 검색...</div>
+        </div>
+        <div class="w7-body">
+          <div class="w7-sidebar">
+            <p class="f-kr">▸ 즐겨찾기</p>
+            <p class="f-kr">▸ 라이브러리</p>
+            <p class="f-kr" style="font-weight:bold;">▾ JIMI</p>
+            <p class="f-kr ind" style="font-weight:bold;">▾ SKILLS</p>
+            <p class="f-kr ind2 active">📂 Visual</p>
+            <p class="f-kr ind2">📁 Web</p>
+            <p class="f-kr ind2">📁 Research</p>
+            <p class="f-kr ind2">📁 Arts Admin</p>
+            <p class="f-kr ind">📁 WORKS</p>
+            <p class="f-kr ind">📁 CONTACT</p>
+          </div>
+          <div class="w7-content">
+            <div class="w7-col">
+              <span>이름</span><span>유형</span><span>숙련도</span>
+            </div>
+            <div class="skill-list">
+              <div class="sk-row sel">
+                <div class="sk-folder"></div>
+                <div class="sk-info">
+                  <strong class="f-kr">Visual Design</strong>
+                  <span class="sk-sub f-kr">Figma · Illustrator · Typography · Layout</span>
+                  <span class="sk-count f-mono">6 items</span>
+                </div>
+                <span class="sk-type f-kr">Design Folder</span>
+                <div class="sk-bar-wrap">
+                  <div class="sk-bar"><div class="sk-fill y" style="width:90%"></div></div>
+                  <span class="sk-lv f-kr">Advanced</span>
+                </div>
+              </div>
+              <div class="sk-row">
+                <div class="sk-folder"></div>
+                <div class="sk-info">
+                  <strong class="f-kr">Web Dev</strong>
+                  <span class="sk-sub f-kr">HTML · CSS · JavaScript · GSAP · API</span>
+                  <span class="sk-count f-mono">5 items</span>
+                </div>
+                <span class="sk-type f-kr">Dev Folder</span>
+                <div class="sk-bar-wrap">
+                  <div class="sk-bar"><div class="sk-fill m" style="width:65%"></div></div>
+                  <span class="sk-lv f-kr">Intermediate</span>
+                </div>
+              </div>
+              <div class="sk-row">
+                <div class="sk-folder"></div>
+                <div class="sk-info">
+                  <strong class="f-kr">UX Research</strong>
+                  <span class="sk-sub f-kr">User Interview · Affinity Diagram · Journey Map</span>
+                  <span class="sk-count f-mono">4 items</span>
+                </div>
+                <span class="sk-type f-kr">Research Folder</span>
+                <div class="sk-bar-wrap">
+                  <div class="sk-bar"><div class="sk-fill m" style="width:58%"></div></div>
+                  <span class="sk-lv f-kr">Intermediate</span>
+                </div>
+              </div>
+              <div class="sk-row">
+                <div class="sk-folder"></div>
+                <div class="sk-info">
+                  <strong class="f-kr">Arts Administration</strong>
+                  <span class="sk-sub f-kr">Exhibition Planning · Pitching · Proposal</span>
+                  <span class="sk-count f-mono">3 items · 현재 학습 중</span>
+                </div>
+                <span class="sk-type f-kr">Admin Folder</span>
+                <div class="sk-bar-wrap">
+                  <div class="sk-bar"><div class="sk-fill g" style="width:28%"></div></div>
+                  <span class="sk-lv dim f-kr">Learning</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="w7-status f-kr">18개 항목  |  Visual Design 선택됨</div>
+      </div>
+    </div>
+  </div>
+  <div class="os-label">OS: Windows 7</div>
+</section>
+
+<!-- ═══════════════════════════════════
+     04 WORKS — Windows 10
+═══════════════════════════════════ -->
+<section id="works" class="os-section os-win10">
+  <div class="w10-window">
+    <div class="w10-titlebar">
+      <span class="w10-title f-kr">📼 C:\JIMI\WORKS</span>
+      <div class="w10-btns">
+        <button class="w10-btn f-kr">—</button>
+        <button class="w10-btn f-kr">□</button>
+        <button class="w10-btn cls f-kr">✕</button>
+      </div>
+    </div>
+    <div class="w10-ribbon">
+      <div class="w10-tabs">
+        <span class="w10-tab active f-kr">Home</span>
+        <span class="w10-tab f-kr">Share</span>
+        <span class="w10-tab f-kr">View</span>
+      </div>
+      <div class="w10-search f-kr">🔍 프로젝트 검색</div>
+    </div>
+    <div class="w10-addr f-kr"><span>내 PC</span> › <span>JIMI</span> › <strong>WORKS</strong></div>
+    <div class="w10-colhdr">
+      <span></span><span class="f-kr">이름</span><span class="f-kr">종류</span><span class="f-kr">날짜</span><span class="f-kr">미리보기</span>
+    </div>
+    <div class="w10-projects">
+
+      <div class="proj-row hl">
+        <div class="proj-accent"></div>
+        <div class="vhs navy"><span>MOODVIE</span></div>
+        <div class="proj-info">
+          <span class="proj-name blue f-kr">MOODVIE</span>
+          <div class="proj-line"></div>
+          <span class="proj-desc f-kr">장르 기반 영화 무드 추천 사이트</span>
+          <span class="proj-sub f-kr">TMDB API · 동적 테마 전환 · 별점 리뷰</span>
+        </div>
+        <span class="proj-type f-kr">Web Project</span>
+        <span class="proj-date f-mono">2024.01</span>
+        <div class="proj-preview prev-moodvie">
+          <div class="mv-card h"><span>HORROR</span><span class="st">★★★★☆</span></div>
+          <div class="mv-card s"><span>SCI-FI</span><span class="st">★★★★★</span></div>
+          <div class="mv-card d"><span>DRAMA</span><span class="st">★★★★★</span></div>
+          <span class="mv-logo">MOODVIE</span>
+        </div>
+      </div>
+
+      <div class="proj-row">
+        <div class="vhs purple"><span>CINEMA</span></div>
+        <div class="proj-info">
+          <span class="proj-name f-kr">Letters from Cinema</span>
+          <span class="proj-desc f-kr">영화 속 편지를 주제로 한 인터랙티브 웹</span>
+          <span class="proj-sub f-kr">GSAP 애니메이션 · BGM 토글 · 타이포 중심</span>
+        </div>
+        <span class="proj-type f-kr">Web Project</span>
+        <span class="proj-date f-mono">2024.03</span>
+        <div class="proj-preview prev-cinema">
+          <p>Letters from Cinema</p>
+          <p>당신에게 보내는 영화의 편지</p>
+          <span class="cinema-play">▶ PLAY BGM</span>
+        </div>
+      </div>
+
+      <div class="proj-row">
+        <div class="vhs red"><span>DAISO</span></div>
+        <div class="proj-info">
+          <span class="proj-name f-kr">Daiso UX Research</span>
+          <span class="proj-desc f-kr">다이소 무선충전기 과열 문제 UX 리서치</span>
+          <span class="proj-sub f-kr">인터뷰 · 어피니티 다이어그램 · 인사이트 도출</span>
+        </div>
+        <span class="proj-type f-kr">UX Research</span>
+        <span class="proj-date f-mono">2024.05</span>
+        <div class="proj-preview prev-daiso">
+          <p class="f-kr">Key Finding: 과열 인지 후에도 계속 사용하는 패턴</p>
+          <div class="atags">
+            <span class="atag y f-kr">불편함 인지</span>
+            <span class="atag m f-kr">습관적 사용</span>
+            <span class="atag g f-kr">안전 무감각</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="proj-row">
+        <div class="vhs indigo"><span>EXHIBIT</span></div>
+        <div class="proj-info">
+          <span class="proj-name f-kr">Exhibition Planning Guide</span>
+          <span class="proj-desc f-kr">20-30대를 위한 전시 기획 참고서</span>
+          <span class="proj-sub f-kr">인상주의 · 초현실주의 · 현대 미술 아카이브</span>
+        </div>
+        <span class="proj-type f-kr">Design + Writing</span>
+        <span class="proj-date f-mono">2024.04</span>
+        <div class="proj-preview prev-exhibit">
+          <p class="f-kr">빛의 기록과 꿈의 해체</p>
+          <div class="etags">
+            <span class="etag n">MONET</span>
+            <span class="etag p">DALI</span>
+            <span class="etag t">MAGRITTE</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="w10-status f-kr">4개 항목  |  MOODVIE 선택됨</div>
+  </div>
+  <div class="os-label">OS: Windows 10</div>
+</section>
+
+<!-- ═══════════════════════════════════
+     05 CONTACT — macOS
+═══════════════════════════════════ -->
+<section id="contact" class="os-section os-macos">
+  <div class="mac-menubar">
+    <span class="mac-apple">&#xf8ff;</span>
+    <span class="mac-mi bd f-kr">Mail</span>
+    <span class="mac-mi f-kr">File</span>
+    <span class="mac-mi f-kr">Edit</span>
+    <span class="mac-mi f-kr">View</span>
+    <span class="mac-mi f-kr">Message</span>
+    <div class="mac-tray">
+      <span>🔊</span><span>🔋</span>
+      <span id="macClock" class="f-kr"></span>
+    </div>
+  </div>
+
+  <div class="mac-win">
+    <div class="mac-titlebar">
+      <div class="tl-wrap">
+        <span class="tl tl-r"></span>
+        <span class="tl tl-y"></span>
+        <span class="tl tl-g"></span>
+      </div>
+      <span class="mac-wintitle f-kr">New Message</span>
+    </div>
+    <div class="mac-toolbar">
+      <button class="mac-send f-kr">Send</button>
+      <span class="mac-ti">📎</span>
+      <span class="mac-ti">📷</span>
+      <span class="mac-ti">🔗</span>
+    </div>
+    <div class="mac-field">
+      <span class="mac-fl f-kr">To:</span>
+      <span class="mac-chip f-kr">you@whoever.com ×</span>
+    </div>
+    <div class="mac-field">
+      <span class="mac-fl f-kr">Subject:</span>
+      <span class="mac-subj f-kr">안녕하세요, JIMI입니다. 함께 작업해요.</span>
+    </div>
+    <div class="mac-body">
+      <p class="f-kr">안녕하세요.</p>
+      <p class="f-kr">시각디자인과에서 웹과 그래픽을 만드는 <strong>JIMI</strong>입니다.</p>
+      <p class="f-kr mac-hl">디자인이 맥락과 만날 때 어떤 일이 생기는지 탐구하고 있습니다.</p>
+      <p class="sub f-kr">협업, 프로젝트 제안, 혹은 그냥 안녕이라도 — 언제든 연락주세요.</p>
+
+      <div class="c-cards">
+        <div class="c-card">
+          <div class="c-acc b"></div>
+          <span class="c-lbl f-mono">EMAIL</span>
+          <div class="c-vbox f-kr">jimi@email.com</div>
+          <span class="c-hint f-kr">클릭하면 메일이 열립니다 →</span>
+        </div>
+        <div class="c-card">
+          <div class="c-acc d"></div>
+          <span class="c-lbl f-mono">GITHUB</span>
+          <span class="c-val f-kr">github.com/jimi</span>
+          <div class="c-line m"></div>
+          <span class="c-hint f-kr">코드 구경 →</span>
+        </div>
+        <div class="c-card">
+          <div class="c-acc m"></div>
+          <span class="c-lbl f-mono">INSTAGRAM</span>
+          <span class="c-val f-kr">@jimi.design</span>
+          <div class="c-line y"></div>
+          <span class="c-hint f-kr">작업 로그 →</span>
+        </div>
+      </div>
+
+      <div class="mac-sep"></div>
+      <p class="mac-sign f-kr">— JIMI  /  Visual Designer  /  시각디자인과</p>
+      <p class="mac-note f-mono">// end of tape. still updating.</p>
+      <div class="mac-lines">
+        <div class="mac-lm"></div>
+        <div class="mac-ly"></div>
+      </div>
+
+      <div class="mac-notif" id="macNotif">
+        <div class="notif-ico">⚠️</div>
+        <div class="notif-body">
+          <strong class="f-kr">Portfolio.app</strong>
+          <p class="f-kr">아직 연락 안 하셨나요?</p>
+          <div class="notif-acts">
+            <button class="nb p f-kr">열기</button>
+            <button class="nb f-kr" id="notifClose">닫기</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mac-dock">
+    <div class="di"><div class="di-icon b">📁</div></div>
+    <div class="di"><div class="di-icon r">✉️</div><div class="d-dot"></div></div>
+    <div class="di"><div class="di-icon y">🎨</div></div>
+    <div class="d-divider"></div>
+    <div class="di"><div class="di-icon g">📝</div></div>
+    <div class="di"><div class="di-icon gr">⚙️</div></div>
+  </div>
+
+  <div class="os-label light">macOS Sonoma  ·  // still updating.</div>
+</section>
+
+<script>
+// ── Clock ──
+function tick() {
+  const t = new Date();
+  const s = t.getHours().toString().padStart(2,'0') + ':' + t.getMinutes().toString().padStart(2,'0');
+  document.getElementById('clock').textContent = s;
+  const mc = document.getElementById('macClock');
+  if (mc) mc.textContent = s;
+}
+tick(); setInterval(tick, 10000);
+
+// ── Start Menu ──
+const startBtn  = document.getElementById('startBtn');
+const startMenu = document.getElementById('startMenu');
+startBtn.addEventListener('click', e => { e.stopPropagation(); startMenu.classList.toggle('open'); });
+document.addEventListener('click', () => startMenu.classList.remove('open'));
+startMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => startMenu.classList.remove('open')));
+
+// ── Scroll → OS theme ──
+const secs    = ['home','about','skill','works','contact'];
+const themes  = { home:'', about:'xp', skill:'win7', works:'win10', contact:'macos' };
+const taskbar = document.getElementById('taskbar');
+const tbItems = document.querySelectorAll('.tb-item');
+
+function activeSection() {
+  let cur = 'home';
+  secs.forEach(id => {
+    const el = document.getElementById(id);
+    if (el && el.getBoundingClientRect().top <= window.innerHeight * 0.45) cur = id;
+  });
+  return cur;
+}
+function applyTheme(id) {
+  taskbar.className = 'taskbar' + (themes[id] ? ' ' + themes[id] : '');
+  tbItems.forEach(b => b.classList.toggle('active', b.dataset.sec === id));
+}
+window.addEventListener('scroll', () => applyTheme(activeSection()), { passive: true });
+
+// ── Taskbar click ──
+tbItems.forEach(b => b.addEventListener('click', () => {
+  document.getElementById(b.dataset.sec)?.scrollIntoView({ behavior: 'smooth' });
+}));
+
+// ── Desktop icon click ──
+window.goTo = id => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+
+// ── Notification close ──
+document.getElementById('notifClose')?.addEventListener('click', () => {
+  document.getElementById('macNotif').style.display = 'none';
+});
+
+applyTheme('home');
+
+// ── My Computer sub-icons toggle ──
+window.toggleSubIcons = function(e) {
+  e.stopPropagation();
+  document.getElementById('subIcons').classList.toggle('open');
+};
+document.addEventListener('click', () => {
+  document.getElementById('subIcons')?.classList.remove('open');
+});
+
+// ── Typing effect for JIMI ──
+function typeHero() {
+  const text = 'JIMI';
+  const el   = document.getElementById('heroName');
+  const cur  = document.getElementById('heroCursor');
+  let i = 0;
+  function next() {
+    if (i < text.length) {
+      const span = document.createElement('span');
+      span.className = 'typed-char';
+      span.style.animationDelay = '0s';
+      span.textContent = text[i];
+      el.insertBefore(span, cur);
+      i++;
+      setTimeout(next, 120 + Math.random() * 80);
+    }
+  }
+  setTimeout(next, 400);
+}
+typeHero();
+</script>
+</body>
+</html>

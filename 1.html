@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>JIMI — Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=VT323&family=Share+Tech+Mono&family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+  <!-- ── FIXED TASKBAR (nav) ── -->
+  <nav class="taskbar" id="taskbar">
+    <button class="start-btn" id="startBtn">⊞ Start</button>
+    <div class="taskbar-divider"></div>
+    <div class="taskbar-windows" id="taskbarWindows">
+      <button class="taskbar-item active" data-target="home">JIMI.EXE</button>
+      <button class="taskbar-item" data-target="about">Paint</button>
+      <button class="taskbar-item" data-target="skill">Explorer</button>
+      <button class="taskbar-item" data-target="works">Works</button>
+      <button class="taskbar-item" data-target="contact">Mail</button>
+    </div>
+    <div class="taskbar-tray">
+      <span>🔊</span>
+      <span id="clock"></span>
+    </div>
+  </nav>
+
+  <!-- Start Menu -->
+  <div class="start-menu" id="startMenu">
+    <div class="start-menu-header">
+      <div class="start-menu-avatar">J</div>
+      <span class="f-kr">JIMI</span>
+    </div>
+    <ul>
+      <li><a href="#home" class="f-kr">🖥 HOME</a></li>
+      <li><a href="#about" class="f-kr">🎨 ABOUT</a></li>
+      <li><a href="#skill" class="f-kr">📁 SKILL</a></li>
+      <li><a href="#works" class="f-kr">📼 WORKS</a></li>
+      <li><a href="#contact" class="f-kr">✉ CONTACT</a></li>
+    </ul>
+    <div class="start-menu-footer f-kr">시각디자인과 · 2024</div>
+  </div>
+
+  <!-- ══════════════════════════════════
+       SECTION 01 — HOME (Windows 95)
+  ══════════════════════════════════ -->
+  <section id="home" class="os-section os-win95">
+    <div class="desktop-icons">
+      <div class="desktop-icon">
+        <div class="icon-img win95-computer"></div>
+        <span class="f-kr">My Computer</span>
+      </div>
+      <div class="desktop-icon">
+        <div class="icon-img win95-trash">🗑</div>
+        <span class="f-kr">Recycle Bin</span>
+      </div>
+      <div class="desktop-icon" onclick="scrollTo95('about')">
+        <div class="icon-img win95-folder">📁</div>
+        <span class="f-kr">PORTFOLIO</span>
+      </div>
+    </div>
+
+    <div class="win95-window home-window">
+      <div class="win95-titlebar">
+        <span class="win95-title f-kr">JIMI.EXE — Portfolio v1.0</span>
+        <div class="win95-controls">
+          <button class="win95-btn f-vt">_</button>
+          <button class="win95-btn f-vt">□</button>
+        </div>
+      </div>
+      <div class="win95-menubar">
+        <span class="f-kr">File</span>
+        <span class="f-kr">Edit</span>
+        <span class="f-kr">View</span>
+        <span class="f-kr">Help</span>
+      </div>
+      <div class="win95-body home-body">
+        <div class="home-hero">
+          <h1 class="f-vt hero-name">JIMI<span class="cursor-blink">_</span></h1>
+          <p class="f-kr hero-sub">Visual Designer · Web · Graphic</p>
+          <div class="hero-tag f-kr">시각디자인과</div>
+          <div class="hero-accent-line"></div>
+          <a href="#about" class="win95-enter-btn f-kr">▶ ENTER PORTFOLIO</a>
+        </div>
+        <div class="home-floppy">
+          <div class="floppy-disk">
+            <div class="floppy-label">
+              <p class="f-kr">PORTFOLIO_2024.exe</p>
+              <p class="f-kr floppy-sub">시각디자인과</p>
+              <div class="floppy-accent"></div>
+              <p class="f-mono floppy-size">1.44 MB  3.5" HD</p>
+            </div>
+            <div class="floppy-shutter"></div>
+          </div>
+          <p class="f-mono home-prompt">C:\USERS\JIMI\PORTFOLIO&gt;_</p>
+        </div>
+      </div>
+      <div class="win95-statusbar">
+        <span class="f-kr">준비</span>
+        <span class="f-mono">5 objects</span>
+      </div>
+    </div>
+
+    <div class="os-label f-mono">OS: Windows 95</div>
+  </section>
+
+  <!-- ══════════════════════════════════
+       SECTION 02 — ABOUT (Windows XP)
+  ══════════════════════════════════ -->
+  <section id="about" class="os-section os-winxp">
+    <div class="winxp-window">
+      <div class="winxp-titlebar">
+        <span class="winxp-title f-kr">🎨 untitled — Paint</span>
+        <div class="winxp-controls">
+          <button class="winxp-btn winxp-min f-vt">_</button>
+          <button class="winxp-btn winxp-max f-vt">□</button>
+          <button class="winxp-btn winxp-close f-vt">✕</button>
+        </div>
+      </div>
+      <div class="winxp-menubar">
+        <span class="f-kr">File</span>
+        <span class="f-kr">Edit</span>
+        <span class="f-kr">View</span>
+        <span class="f-kr">Image</span>
+        <span class="f-kr">Options</span>
+        <span class="f-kr">Help</span>
+      </div>
+      <div class="winxp-body">
+        <!-- Tool panel -->
+        <div class="paint-tools">
+          <div class="tool-grid">
+            <button class="tool active">✦</button><button class="tool">⬚</button>
+            <button class="tool">⌫</button><button class="tool">⬛</button>
+            <button class="tool">✒</button><button class="tool">🔍</button>
+            <button class="tool yellow">A</button><button class="tool">✏</button>
+            <button class="tool">▭</button><button class="tool">○</button>
+          </div>
+          <div class="color-boxes">
+            <div class="fg-color"></div>
+            <div class="bg-color"></div>
+          </div>
+        </div>
+        <!-- Canvas -->
+        <div class="paint-canvas">
+          <div class="about-layout">
+            <!-- Portrait -->
+            <div class="portrait-box">
+              <svg viewBox="0 0 360 480" xmlns="http://www.w3.org/2000/svg" class="portrait-svg">
+                <rect width="360" height="480" fill="#fff" stroke="#ACA899" stroke-width="1"/>
+                <ellipse cx="180" cy="160" rx="100" ry="110" fill="#FFE4C4" stroke="#1A1A1A" stroke-width="2"/>
+                <ellipse cx="180" cy="80" rx="108" ry="60" fill="#1A1A1A"/>
+                <ellipse cx="180" cy="120" rx="102" ry="50" fill="#FFE4C4"/>
+                <ellipse cx="148" cy="150" rx="14" ry="10" fill="#fff" stroke="#1A1A1A" stroke-width="1.5"/>
+                <ellipse cx="212" cy="150" rx="14" ry="10" fill="#fff" stroke="#1A1A1A" stroke-width="1.5"/>
+                <circle cx="150" cy="151" r="6" fill="#1A1A1A"/>
+                <circle cx="214" cy="151" r="6" fill="#1A1A1A"/>
+                <circle cx="152" cy="149" r="2" fill="#fff"/>
+                <circle cx="216" cy="149" r="2" fill="#fff"/>
+                <path d="M134 136 Q148 130 162 136" stroke="#1A1A1A" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+                <path d="M198 136 Q212 130 226 136" stroke="#1A1A1A" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+                <path d="M180 160 L173 185 Q180 190 187 185 Z" fill="#f0c8a0" stroke="#c8966e" stroke-width="1"/>
+                <path d="M160 205 Q180 220 200 205" stroke="#c07060" stroke-width="2" fill="none" stroke-linecap="round"/>
+                <ellipse cx="80" cy="168" rx="14" ry="20" fill="#FFE4C4" stroke="#1A1A1A" stroke-width="1.5"/>
+                <ellipse cx="280" cy="168" rx="14" ry="20" fill="#FFE4C4" stroke="#1A1A1A" stroke-width="1.5"/>
+                <rect x="158" y="255" width="44" height="60" fill="#FFE4C4" stroke="#1A1A1A" stroke-width="1.5"/>
+                <path d="M80 380 Q100 290 158 310 L180 290 L202 310 Q260 290 280 380 Z" fill="#2A7FD4"/>
+                <path d="M20 400 Q60 380 100 400 Q140 420 180 400 Q220 380 260 400 Q300 420 340 400" stroke="#FF00FF" stroke-width="3" fill="none" stroke-linecap="round"/>
+                <rect x="20" y="445" width="120" height="24" fill="#FFFF00"/>
+                <text x="28" y="463" font-family="'Noto Sans KR', sans-serif" font-size="16" font-weight="bold" fill="#000">JIMI</text>
+              </svg>
+            </div>
+            <!-- Text -->
+            <div class="about-text">
+              <h2 class="f-vt about-title">ABOUT.txt</h2>
+              <div class="about-accent-lines">
+                <div class="accent-blue"></div>
+                <div class="accent-magenta"></div>
+              </div>
+              <p class="f-kr about-desc">시각디자인과에서<br/>웹과 그래픽 사이를 오가며 작업합니다.</p>
+              <p class="f-kr about-desc sub">예술경영을 향해 반수 중이고,<br/>디자인이 맥락과 만날 때 어떤 일이 생기는지<br/>관심이 많습니다.</p>
+              <div class="about-stamps">
+                <span class="stamp stamp-magenta f-kr">Visual Design</span>
+                <span class="stamp stamp-blue f-kr">Web Dev</span>
+                <span class="stamp stamp-yellow f-kr">Arts Admin</span>
+              </div>
+              <div class="about-info">
+                <div class="info-row"><span class="f-mono info-key">FIELD</span><span class="f-kr info-val">시각디자인과</span></div>
+                <div class="info-row"><span class="f-mono info-key">INTEREST</span><span class="f-kr info-val">Web · Graphic · Exhibition · UX</span></div>
+                <div class="info-row"><span class="f-mono info-key">TOOLS</span><span class="f-kr info-val">Figma · HTML/CSS/JS · Illustrator</span></div>
+                <div class="info-row">
+                  <span class="f-mono info-key">STATUS</span>
+                  <span class="f-kr info-val status-badge">예술경영 반수 중</span>
+                </div>
+              </div>
+              <p class="f-mono about-footnote">// drawn with MS Paint XP edition</p>
+              <div class="magenta-line"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Color palette -->
+      <div class="paint-palette">
+        <div class="palette-swatch" style="background:#000"></div>
+        <div class="palette-swatch" style="background:#808080"></div>
+        <div class="palette-swatch" style="background:#C0C0C0"></div>
+        <div class="palette-swatch" style="background:#FF0000"></div>
+        <div class="palette-swatch active" style="background:#FF00FF"></div>
+        <div class="palette-swatch active" style="background:#FFFF00"></div>
+        <div class="palette-swatch" style="background:#00FF00"></div>
+        <div class="palette-swatch" style="background:#00FFFF"></div>
+        <div class="palette-swatch" style="background:#2A7FD4"></div>
+        <div class="palette-swatch" style="background:#000080"></div>
+      </div>
+    </div>
+    <div class="os-label f-mono">OS: Windows XP</div>
+  </section>
+
+  <!-- ══════════════════════════════════
+       SECTION 03 — SKILL (Windows 7)
+  ══════════════════════════════════ -->
+  <section id="skill" class="os-section os-win7">
+    <div class="win7-window">
+      <div class="win7-titlebar">
+        <span class="win7-title f-kr">📁 C:\JIMI\SKILLS — Windows Explorer</span>
+        <div class="win7-controls">
+          <button class="win7-btn f-vt">_</button>
+          <button class="win7-btn f-vt">□</button>
+          <button class="win7-btn win7-close f-vt">✕</button>
+        </div>
+      </div>
+      <div class="win7-toolbar">
+        <button class="win7-navbtn f-kr">◀</button>
+        <button class="win7-navbtn f-kr">▶</button>
+        <div class="win7-breadcrumb f-kr">Libraries ▸ JIMI ▸ <strong>SKILLS</strong></div>
+        <div class="win7-search f-kr">🔍 검색...</div>
+      </div>
+      <div class="win7-body">
+        <!-- Sidebar -->
+        <div class="win7-sidebar">
+          <p class="f-kr sidebar-item">▸ 즐겨찾기</p>
+          <p class="f-kr sidebar-item">▸ 라이브러리</p>
+          <p class="f-kr sidebar-item expand">▾ JIMI</p>
+          <p class="f-kr sidebar-item indent expand">▾ SKILLS</p>
+          <p class="f-kr sidebar-item indent2 active">📂 Visual</p>
+          <p class="f-kr sidebar-item indent2">📁 Web</p>
+          <p class="f-kr sidebar-item indent2">📁 Research</p>
+          <p class="f-kr sidebar-item indent2">📁 Arts Admin</p>
+          <p class="f-kr sidebar-item indent">📁 WORKS</p>
+          <p class="f-kr sidebar-item indent">📁 CONTACT</p>
+        </div>
+        <!-- Content -->
+        <div class="win7-content">
+          <div class="win7-col-header">
+            <span class="f-kr">이름</span>
+            <span class="f-kr">유형</span>
+            <span class="f-kr">숙련도</span>
+          </div>
+          <div class="skill-rows">
+            <div class="skill-row selected">
+              <div class="skill-folder-icon"></div>
+              <div class="skill-info">
+                <strong class="f-kr">Visual Design</strong>
+                <span class="f-kr skill-sub">Figma · Illustrator · Typography · Layout</span>
+                <span class="f-mono skill-count">6 items</span>
+              </div>
+              <span class="f-kr skill-type">Design Folder</span>
+              <div class="skill-bar-wrap">
+                <div class="skill-bar"><div class="skill-fill yellow" style="width:90%"></div></div>
+                <span class="f-kr skill-level">Advanced</span>
+              </div>
+            </div>
+            <div class="skill-row">
+              <div class="skill-folder-icon"></div>
+              <div class="skill-info">
+                <strong class="f-kr">Web Dev</strong>
+                <span class="f-kr skill-sub">HTML · CSS · JavaScript · GSAP · API</span>
+                <span class="f-mono skill-count">5 items</span>
+              </div>
+              <span class="f-kr skill-type">Dev Folder</span>
+              <div class="skill-bar-wrap">
+                <div class="skill-bar"><div class="skill-fill magenta" style="width:68%"></div></div>
+                <span class="f-kr skill-level">Intermediate</span>
+              </div>
+            </div>
+            <div class="skill-row">
+              <div class="skill-folder-icon"></div>
+              <div class="skill-info">
+                <strong class="f-kr">UX Research</strong>
+                <span class="f-kr skill-sub">User Interview · Affinity Diagram · Journey Map</span>
+                <span class="f-mono skill-count">4 items</span>
+              </div>
+              <span class="f-kr skill-type">Research Folder</span>
+              <div class="skill-bar-wrap">
+                <div class="skill-bar"><div class="skill-fill magenta" style="width:60%"></div></div>
+                <span class="f-kr skill-level">Intermediate</span>
+              </div>
+            </div>
+            <div class="skill-row">
+              <div class="skill-folder-icon"></div>
+              <div class="skill-info">
+                <strong class="f-kr">Arts Administration</strong>
+                <span class="f-kr skill-sub">Exhibition Planning · Pitching · Proposal</span>
+                <span class="f-mono skill-count">3 items · 현재 학습 중</span>
+              </div>
+              <span class="f-kr skill-type">Admin Folder</span>
+              <div class="skill-bar-wrap">
+                <div class="skill-bar"><div class="skill-fill grey" style="width:30%"></div></div>
+                <span class="f-kr skill-level grey-text">Learning</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="win7-statusbar f-kr">18개 항목  |  Visual Design 선택됨</div>
+    </div>
+    <div class="os-label f-mono">OS: Windows 7</div>
+  </section>
+
+  <!-- ══════════════════════════════════
+       SECTION 04 — WORKS (Windows 10)
+  ══════════════════════════════════ -->
+  <section id="works" class="os-section os-win10">
+    <div class="win10-window">
+      <div class="win10-titlebar">
+        <span class="win10-title f-kr">📼 C:\JIMI\WORKS</span>
+        <div class="win10-controls">
+          <button class="win10-btn f-kr">—</button>
+          <button class="win10-btn f-kr">□</button>
+          <button class="win10-btn win10-close f-kr">✕</button>
+        </div>
+      </div>
+      <div class="win10-ribbon">
+        <div class="ribbon-tabs">
+          <span class="f-kr ribbon-tab active">Home</span>
+          <span class="f-kr ribbon-tab">Share</span>
+          <span class="f-kr ribbon-tab">View</span>
+        </div>
+        <div class="win10-search f-kr">🔍 프로젝트 검색</div>
+      </div>
+      <div class="win10-addressbar f-kr">
+        <span class="addr-link">내 PC</span> › <span class="addr-link">JIMI</span> › <strong>WORKS</strong>
+      </div>
+      <div class="win10-col-header">
+        <span class="f-kr">이름</span>
+        <span class="f-kr">종류</span>
+        <span class="f-kr">날짜</span>
+        <span class="f-kr">미리보기</span>
+      </div>
+      <div class="win10-projects">
+
+        <div class="project-row hover">
+          <div class="project-left-accent"></div>
+          <div class="vhs-icon dark-blue">
+            <span class="f-mono vhs-label">MOODVIE</span>
+          </div>
+          <div class="project-info">
+            <strong class="f-kr project-name blue">MOODVIE</strong>
+            <div class="project-underline magenta"></div>
+            <p class="f-kr project-desc">장르 기반 영화 무드 추천 사이트</p>
+            <p class="f-kr project-sub">TMDB API · 동적 테마 전환 · 별점 리뷰</p>
+          </div>
+          <span class="f-kr project-type">Web Project</span>
+          <span class="f-mono project-date">2024.01</span>
+          <div class="project-preview moodvie-preview">
+            <div class="movie-card horror"><span>HORROR</span><span class="stars">★★★★☆</span></div>
+            <div class="movie-card scifi"><span>SCI-FI</span><span class="stars">★★★★★</span></div>
+            <div class="movie-card drama"><span>DRAMA</span><span class="stars">★★★★★</span></div>
+            <span class="f-vt moodvie-logo">MOODVIE</span>
+          </div>
+        </div>
+
+        <div class="project-row">
+          <div class="vhs-icon dark-purple">
+            <span class="f-mono vhs-label">CINEMA</span>
+          </div>
+          <div class="project-info">
+            <strong class="f-kr project-name">Letters from Cinema</strong>
+            <p class="f-kr project-desc">영화 속 편지를 주제로 한 인터랙티브 웹</p>
+            <p class="f-kr project-sub">GSAP 애니메이션 · BGM 토글 · 타이포 중심</p>
+          </div>
+          <span class="f-kr project-type">Web Project</span>
+          <span class="f-mono project-date">2024.03</span>
+          <div class="project-preview cinema-preview">
+            <p class="f-kr cinema-title">Letters from Cinema</p>
+            <p class="f-kr cinema-sub">당신에게 보내는 영화의 편지</p>
+            <span class="f-mono cinema-play">▶ PLAY BGM</span>
+          </div>
+        </div>
+
+        <div class="project-row">
+          <div class="vhs-icon dark-red">
+            <span class="f-mono vhs-label">DAISO</span>
+          </div>
+          <div class="project-info">
+            <strong class="f-kr project-name">Daiso UX Research</strong>
+            <p class="f-kr project-desc">다이소 무선충전기 과열 문제 UX 리서치</p>
+            <p class="f-kr project-sub">인터뷰 · 어피니티 다이어그램 · 인사이트 도출</p>
+          </div>
+          <span class="f-kr project-type">UX Research</span>
+          <span class="f-mono project-date">2024.05</span>
+          <div class="project-preview daiso-preview">
+            <p class="f-kr daiso-finding">Key Finding: 과열 인지 후에도 계속 사용하는 패턴</p>
+            <div class="affinity-tags">
+              <span class="affinity-tag yellow f-kr">불편함 인지</span>
+              <span class="affinity-tag magenta f-kr">습관적 사용</span>
+              <span class="affinity-tag grey f-kr">안전 무감각</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-row">
+          <div class="vhs-icon dark-navy">
+            <span class="f-mono vhs-label">EXHIBIT</span>
+          </div>
+          <div class="project-info">
+            <strong class="f-kr project-name">Exhibition Planning Guide</strong>
+            <p class="f-kr project-desc">20-30대를 위한 전시 기획 참고서</p>
+            <p class="f-kr project-sub">인상주의 · 초현실주의 · 현대 미술 아카이브</p>
+          </div>
+          <span class="f-kr project-type">Design + Writing</span>
+          <span class="f-mono project-date">2024.04</span>
+          <div class="project-preview exhibit-preview">
+            <p class="f-kr exhibit-title">빛의 기록과 꿈의 해체</p>
+            <div class="artist-tags">
+              <span class="artist-tag navy f-mono">MONET</span>
+              <span class="artist-tag purple f-mono">DALI</span>
+              <span class="artist-tag teal f-mono">MAGRITTE</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="win10-statusbar f-kr">4개 항목  |  MOODVIE 선택됨</div>
+    </div>
+    <div class="os-label f-mono">OS: Windows 10</div>
+  </section>
+
+  <!-- ══════════════════════════════════
+       SECTION 05 — CONTACT (macOS)
+  ══════════════════════════════════ -->
+  <section id="contact" class="os-section os-macos">
+    <!-- macOS menu bar -->
+    <div class="mac-menubar">
+      <span class="mac-apple">&#xf8ff;</span>
+      <span class="f-kr mac-menu-item bold">Mail</span>
+      <span class="f-kr mac-menu-item">File</span>
+      <span class="f-kr mac-menu-item">Edit</span>
+      <span class="f-kr mac-menu-item">View</span>
+      <span class="f-kr mac-menu-item">Message</span>
+      <div class="mac-tray">
+        <span>🔊</span>
+        <span>🔋</span>
+        <span class="f-kr" id="macClock"></span>
+      </div>
+    </div>
+
+    <div class="mac-window">
+      <!-- Traffic lights -->
+      <div class="mac-titlebar">
+        <div class="traffic-lights">
+          <span class="tl tl-red"></span>
+          <span class="tl tl-yellow"></span>
+          <span class="tl tl-green"></span>
+        </div>
+        <span class="mac-title f-kr">New Message</span>
+      </div>
+      <!-- Mail toolbar -->
+      <div class="mac-toolbar">
+        <button class="mac-send-btn f-kr">Send</button>
+        <span class="mac-tool-icon">📎</span>
+        <span class="mac-tool-icon">📷</span>
+        <span class="mac-tool-icon">🔗</span>
+      </div>
+      <!-- To / Subject -->
+      <div class="mac-field">
+        <span class="f-kr mac-field-label">To:</span>
+        <div class="mac-recipient f-kr">you@whoever.com <span class="recipient-x">×</span></div>
+      </div>
+      <div class="mac-field">
+        <span class="f-kr mac-field-label">Subject:</span>
+        <span class="f-kr mac-subject">안녕하세요, JIMI입니다. 함께 작업해요.</span>
+      </div>
+      <!-- Body -->
+      <div class="mac-body">
+        <p class="f-kr mac-greeting">안녕하세요.</p>
+        <p class="f-kr mac-intro">시각디자인과에서 웹과 그래픽을 만드는 <strong>JIMI</strong>입니다.</p>
+        <p class="f-kr mac-highlight">디자인이 맥락과 만날 때 어떤 일이 생기는지 탐구하고 있습니다.</p>
+        <p class="f-kr mac-outro">협업, 프로젝트 제안, 혹은 그냥 안녕이라도 — 언제든 연락주세요.</p>
+
+        <div class="contact-cards">
+          <div class="contact-card">
+            <div class="card-accent blue-accent"></div>
+            <span class="f-mono card-label">EMAIL</span>
+            <div class="card-value-box f-kr">jimi@email.com</div>
+            <span class="f-kr card-hint">클릭하면 메일이 열립니다 →</span>
+          </div>
+          <div class="contact-card">
+            <div class="card-accent dark-accent"></div>
+            <span class="f-mono card-label">GITHUB</span>
+            <span class="f-kr card-value">github.com/jimi</span>
+            <div class="card-line magenta"></div>
+            <span class="f-kr card-hint">코드 구경 →</span>
+          </div>
+          <div class="contact-card">
+            <div class="card-accent magenta-accent"></div>
+            <span class="f-mono card-label">INSTAGRAM</span>
+            <span class="f-kr card-value">@jimi.design</span>
+            <div class="card-line yellow"></div>
+            <span class="f-kr card-hint">작업 로그 →</span>
+          </div>
+        </div>
+
+        <div class="mac-signoff-line"></div>
+        <p class="f-kr mac-signoff">— JIMI  /  Visual Designer  /  시각디자인과</p>
+        <p class="f-mono mac-footnote">// end of tape. still updating.</p>
+        <div class="signoff-accents">
+          <div class="sa-magenta"></div>
+          <div class="sa-yellow"></div>
+        </div>
+      </div>
+
+      <!-- macOS notification -->
+      <div class="mac-notification" id="macNotif">
+        <div class="notif-icon">⚠️</div>
+        <div class="notif-text">
+          <strong class="f-kr">Portfolio.app</strong>
+          <p class="f-kr">아직 연락 안 하셨나요?</p>
+        </div>
+        <div class="notif-actions">
+          <button class="notif-btn primary f-kr">열기</button>
+          <button class="notif-btn f-kr" onclick="this.closest('.mac-notification').style.display='none'">닫기</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- macOS Dock -->
+    <div class="mac-dock">
+      <div class="dock-item"><div class="dock-icon blue">📁</div></div>
+      <div class="dock-item active"><div class="dock-icon red">✉️</div><div class="dock-dot"></div></div>
+      <div class="dock-item"><div class="dock-icon yellow">🎨</div></div>
+      <div class="dock-divider"></div>
+      <div class="dock-item"><div class="dock-icon green">📝</div></div>
+      <div class="dock-item"><div class="dock-icon grey">⚙️</div></div>
+    </div>
+
+    <div class="os-label f-mono light">macOS Sonoma  ·  // still updating.</div>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>
